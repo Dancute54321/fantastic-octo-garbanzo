@@ -1,200 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Grade</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade</title>
+    <script>
+        function convertGrade() {
+            // Get the grade input from the user
+            var grade = parseFloat(document.getElementById('grade').value);
+            var resultText = '';
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=PT+Serif+Caption&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-body, html {
-	height:100%;
-	font-family 'Poppins', sans-serif;
-	background:#f1f8e9b8;
-	font-size:15px;
-	margin:0px auto;
-}
-table {
-	width:100%;
-	border-collapse: collapse;
-	max-width:600px;
-	margin-bottom:30px!important;
-	margin-top:30px!important;
-	margin:0px auto;
-}
-table tr th {
-	font-weight:600;
-}
-table tr td, table tr th {
-	padding:7px 10px;
-	border: 1px solid #818181;
-	text-align:left;
-	width:300px;
-	font-size:14px;
-	font-weight:500;
-}
-input {
-	padding: 10px;
-	background:transparent;
-	height:20px;
-	width: 230px;
-	border: 1px solid #999999;
-	border-radius: 4px;
-	font-size:14px;
-	-outline:none;
-}
-mark {
-	font-size:26px;
-	font-weight:bold;
-	color:#FF5722;
-}
-p{
-	font-size:14px;
-}
-h1, h2, p {
-	padding:0px;
-	margin:0px;
-	text-align:center;
-}
-address {
-	font-size:13px;
-	text-align:center;
-}
-h1 {
-	margin-top:20px;
-	font-size:35px;
-	font-weight:800;
-}
-h2 {
-	margin-top:10px;
-	font-size:18px;
-}
-.fname {
-	font-family 'PT Serif Caption', serif;
-	    border-bottom: 2px dotted black;
-	margin-bottom:10px;
-}
-.fname b{
-    border-bottom: 3px solid #f2f8eb;
-    padding-right:5px;
-}
-.student tr {
-    border: none;
-    padding: 5px 0px;
-    display: flex;
-}
-.student th, .student td{
-	border:none;
-}
-.student th{
-	width:80px;
-	padding-bottom: 0px;
-}
-.student td{
-	border-bottom: 2px dotted black;
-    padding:0px;
-}
-.student td span{
-    position: relative;
-    top: 6px;
-}
-.col-blue{font-size:16px;color:#2196F3;}
-.col-green{font-size:16px;color:green;}
-.col-red{ font-size:16px;color:red; }
-</style>
+            // Validate if the grade is between 0 and 100
+            if (isNaN(grade) || grade < 0 || grade > 100) {
+                resultText = "Error: Invalid grade. Please enter a grade between 0 and 100.";
+            } else {
+                // Determine university grade based on the provided score
+                if (grade >= 95) {
+                    resultText = "The grade is " + grade + ", and the university grade is 1.00.";
+                } else if (grade >= 90) {
+                    resultText = "The grade is " + grade + ", and the university grade is 2.25.";
+                } else if (grade >= 85) {
+                    resultText = "The grade is " + grade + ", and the university grade is 2.50.";
+                } else if (grade >= 80) {
+                    resultText = "The grade is " + grade + ", and the university grade is 2.75.";
+                } else if (grade >= 75) {
+                    resultText = "The grade is " + grade + ", and the university grade is 3.00.";
+                } else if (grade >= 70) {
+                    resultText = "The grade is " + grade + ", and the university grade is 3.25.";
+                } else if (grade >= 65) {
+                    resultText = "The grade is " + grade + ", and the university grade is 3.50.";
+                } else if (grade >= 60) {
+                    resultText = "The grade is " + grade + ", and the university grade is 3.75.";
+                } else if (grade >= 55) {
+                    resultText = "The grade is " + grade + ", and the university grade is 4.00.";
+                } else {
+                    resultText = "The grade is " + grade + ", which is a Fail and converts to university grade 5.00.";
+                }
+            }
+
+            // Display the result
+            document.getElementById('result').innerText = resultText;
+        }
+    </script>
 </head>
 <body>
+    <h1>Grade</h1>
 
-<table class="table">
-  <tr>
-    <th>Subject</th>
-    <th>Marks</th>
-    <th>Grade</th>
-  </tr>
-  <tr>
-    <td>WebTech 2</td>
-    <td><input type="number" placeholder="Enter Marks..." class="marks"/></td>
-    <td class="grade"></td>
-  </tr>
-  <tr>
-  
+    <form onsubmit="event.preventDefault(); convertGrade();">
+        <label for="grade">Enter the grade (0 - 100):</label>
+        <input type="number" id="grade" required>
+        <input type="submit" value="Convert Grade">
+    </form>
 
+    <p id="result"></p>
 
-<script>
-document.addEventListener('keyup', function (event) {
-									 
-var totalmarks = 0;
-var x = document.getElementsByClassName("marks");
-for(var i = 0; i<x.length; i++){
-
-if(x[i].value!='')	{
-
-if(parseFloat(x[i].value)>90)
-{
- document.getElementsByClassName("grade")[i].innerHTML='<mark class="col-green">Grade 1.0</mark>';
-}
-else if(parseFloat(x[i].value)>80)
-{
- document.getElementsByClassName("grade")[i].innerHTML='<mark class="col-blue">Grade 2.25</mark>';
-}
-else if(parseFloat(x[i].value)>70)
-{
- document.getElementsByClassName("grade")[i].innerHTML='<mark class="col-blue">Grade 2.5</mark>';
-}
-else if(parseFloat(x[i].value)>60)
-{
- document.getElementsByClassName("grade")[i].innerHTML='<mark class="col-blue">Grade 2.8</mark>';
-}
-else if(parseFloat(x[i].value)>50)
-{
- document.getElementsByClassName("grade")[i].innerHTML='<mark class="col-blue">Grade 3.0</mark>';
-}
-else if(parseFloat(x[i].value)>40)
-{
- document.getElementsByClassName("grade")[i].innerHTML='<mark class="col-blue">Grade 5.0</mark>';
-}		
-else 
-{
- document.getElementsByClassName("grade")[i].innerHTML='<mark class="col-red">Fail</mark>';
-}
- totalmarks += parseFloat(x[i].value);
-}
-}
-
-document.getElementById('totalmarks').innerHTML='<mark>'+totalmarks +' / 500</mark>';
-
-var percentage = parseFloat(totalmarks)/5;
-
-document.getElementById('percentage').innerHTML='<mark>'+percentage +' %</mark>';
-
-if(parseFloat(percentage)>100)
-{
- document.getElementById("finalgrade").innerHTML='<mark class="col-green">Grade 90-100</mark>';
-}
-else if(parseFloat(percentage)>99)
-{
- document.getElementById("finalgrade").innerHTML='<mark class="col-blue">Grade 80-89</mark>';
-}
-else if(parseFloat(percentage)>89)
-{
- document.getElementById("finalgrade").innerHTML='<mark class="col-blue">Grade 70-79</mark>';
-}
-else if(parseFloat(percentage)>79)
-{
- document.getElementById("finalgrade").innerHTML='<mark class="col-blue">Grade 60-69</mark>';
-}
-else if(parseFloat(percentage)>69)
-{
- document.getElementById("finalgrade").innerHTML='<mark class="col-blue">Grade 50-59</mark>';
-}
-else if(parseFloat(percentage)>60)
-{
- document.getElementById("finalgrade").innerHTML='<mark class="col-blue">Grade 40-49</mark>';
-}		
-else 
-{
- document.getElementById("finalgrade").innerHTML='<mark class="col-red">5.0</mark>';
-}
-});
-</script>
 </body>
 </html>
