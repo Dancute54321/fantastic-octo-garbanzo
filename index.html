@@ -39,7 +39,7 @@
             margin-bottom: 5px;
             color: #34495e;
         }
-        input[type="number"], input[type="submit"] {
+        input[type="text"], input[type="number"], input[type="submit"] {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
@@ -79,9 +79,14 @@
 </head>
 <body>
     <div class="container">
-        <h2>Grade Converter</h2>
+        <h2>University Grading System</h2>
 
-        <!-- Form to take grade input -->
+        <!-- Form to take student name and grade input -->
+        <div class="form-group">
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="studentName" required>
+        </div>
+
         <div class="form-group">
             <label for="grade">Enter your grade (0-100):</label>
             <input type="number" id="grade" name="grade" min="0" max="100" required>
@@ -96,7 +101,8 @@
 
     <script>
         function convertGrade() {
-            // Get the grade input value
+            // Get the student name and grade input values
+            var studentName = document.getElementById("studentName").value;
             var grade = document.getElementById("grade").value;
             var resultArea = document.getElementById("result");
 
@@ -128,7 +134,7 @@
                 }
 
                 // Display the result
-                resultArea.innerHTML = `<p class="info">The grade is ${grade}, and the university grade is <strong>${universityGrade}</strong>.</p>`;
+                resultArea.innerHTML = `<p class="info">Hello ${studentName}, your grade is ${grade}, and your university grade is <strong>${universityGrade}</strong>.</p>`;
             }
         }
     </script>
