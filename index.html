@@ -4,55 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grade</title>
-    <script>
-        function convertGrade() {
-            // Get the grade input from the user
-            var grade = parseFloat(document.getElementById('grade').value);
-            var resultText = '';
-
-            // Validate if the grade is between 0 and 100
-            if (isNaN(grade) || grade < 0 || grade > 100) {
-                resultText = "Error: Invalid grade. Please enter a grade between 0 and 100.";
-            } else {
-                // Determine university grade based on the provided score
-                if (grade >= 95) {
-                    resultText = "The grade is " + grade + ", and the university grade is 1.00.";
-                } else if (grade >= 90) {
-                    resultText = "The grade is " + grade + ", and the university grade is 2.25.";
-                } else if (grade >= 85) {
-                    resultText = "The grade is " + grade + ", and the university grade is 2.50.";
-                } else if (grade >= 80) {
-                    resultText = "The grade is " + grade + ", and the university grade is 2.75.";
-                } else if (grade >= 75) {
-                    resultText = "The grade is " + grade + ", and the university grade is 3.00.";
-                } else if (grade >= 70) {
-                    resultText = "The grade is " + grade + ", and the university grade is 3.25.";
-                } else if (grade >= 65) {
-                    resultText = "The grade is " + grade + ", and the university grade is 3.50.";
-                } else if (grade >= 60) {
-                    resultText = "The grade is " + grade + ", and the university grade is 3.75.";
-                } else if (grade >= 55) {
-                    resultText = "The grade is " + grade + ", and the university grade is 4.00.";
-                } else {
-                    resultText = "The grade is " + grade + ", which is a Fail and converts to university grade 5.00.";
-                }
-            }
-
-            // Display the result
-            document.getElementById('result').innerText = resultText;
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full height */
         }
-    </script>
+        .container {
+            width: 400px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="number"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .info {
+            color: #333;
+            font-weight: normal;
+        }
+    </style>
 </head>
 <body>
-    <h1>Grade</h1>
+    <div class="container">
+        <h2>Grade</h2>
 
-    <form onsubmit="event.preventDefault(); convertGrade();">
-        <label for="grade">Enter the grade (0 - 100):</label>
-        <input type="number" id="grade" required>
-        <input type="submit" value="Convert Grade">
-    </form>
+        <!-- Form to take grade input -->
+        <div class="form-group">
+            <label for="grade">Enter your grade (0-100):</label>
+            <input type="number" id="grade" name="grade" min="0" max="100" required>
+        </div>
+        <input type="submit" value="Convert Grade" onclick="convertGrade()">
 
-    <p id="result"></p>
+        <!-- Result Area -->
+        <div id="result" class="result">
+            <!-- The result will be displayed here dynamically -->
+        </div>
+    </div>
 
+    <script>
+        function convertGrade() {
+            // Get the grade input value
+            var grade = document.getElementById("grade").value;
+            var resultArea = document.getElementById("result");
+
+            // Check if the grade is within the valid range
+            if (grade < 0 || grade > 100) {
+                resultArea.innerHTML = '<p class="error">Error: Invalid grade. Please enter a grade between 0 and 100.</p>';
+            } else {
+                // Convert the grade into the corresponding university grade
+                var universityGrade = '';
+
+                if (grade >= 90) {
+                    universityGrade = '1.0';
+                } else if (grade >= 85) {
+                    universityGrade = '2.25';  // Updated for 85 grade
+                } else if (grade >= 80) {
+                    universityGrade = '2.5';
+                } else if (grade >= 75) {
+                    universityGrade = '2.75';
+                } else if (grade >= 70) {
+                    universityGrade = '3.0';
+                } else if (grade >= 65) {
+                    universityGrade = '3.25';
+                } else if (grade >= 60) {
+                    universityGrade = '3.5';
+                } else if (grade >= 55) {
+                    universityGrade = '3.75';
+                } else if (grade >= 50) {
+                    universityGrade = '4.0';
+                } else {
+                    universityGrade = '5.0 (Fail)';
+                }
+
+                // Display the result
+                resultArea.innerHTML = `<p class="info">The grade is ${grade}, and the university grade is ${universityGrade}.</p>`;
+            }
+        }
+    </script>
 </body>
 </html>
